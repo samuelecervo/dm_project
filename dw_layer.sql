@@ -1,19 +1,15 @@
--- =========================================================
--- DATA WAREHOUSE LAYER - CREATION
--- =========================================================
 BEGIN;
 
--- DROP SCHEMA se esiste
 DROP SCHEMA IF EXISTS dw_layer CASCADE;
 CREATE SCHEMA IF NOT EXISTS dw_layer;
 
 -- =========================================================
--- DIMENSION TABLES
+-- DIMENSION
 -- =========================================================
 
 -- dimDate
 CREATE TABLE dw_layer.dimDate AS
-SELECT DISTINCT
+SELECT DISTINCT 
     date AS dateKey,
     date,
     EXTRACT(YEAR FROM date) AS year,
@@ -54,24 +50,23 @@ SELECT DISTINCT
 FROM reconciled_layer.vaccines;
 
 -- =========================================================
--- FACT TABLES
+-- FACT
 -- =========================================================
 
 -- fact_vaccination
 CREATE TABLE dw_layer.fact_vaccination AS
 SELECT
     date AS date_key,
-    region_code AS region_code,
+    supplier as vaccine_key,
+    region_code AS region_key,
     age_group AS age_key,
-    supplier AS vaccine_key, 
     SUM(first_dose) AS first_dose,
     SUM(second_dose) AS second_dose,
-    SUM(booster) AS booster,
+    SUM(additional_booster_dose) AS booster,
     SUM(males) AS males,
     SUM(females) AS females
 FROM reconciled_layer.italian_vaccination
-GROUP BY date, region_code, age_group, supplier;
-
+GROUP BY date, supplier, region_code, age_group;
 
 -- fact_covid_cases
 CREATE TABLE dw_layer.fact_covid_cases AS
@@ -79,20 +74,23 @@ SELECT
     date AS date_key,
     region_code AS region_key,
     SUM(new_positives) AS new_positives,
-    SUM(hospedalized) as hospitalized,
+    SUM(hospitalized) AS hospitalized,
     SUM(deceased) AS deceased,
-    SUM(swabs) AS swabs
+    MAX(swabs) AS swabs 
 FROM reconciled_layer.covid_cases
 GROUP BY date, region_code;
 
 -- fact_population
 CREATE TABLE dw_layer.fact_population AS
 SELECT
+    year,
     region_code AS region_key,
     age_group AS age_key,
-    male_count,
-    female_count,
-    total_count
-FROM reconciled_layer.population;
+    SUM(male_count) AS male_count,
+    SUM(female_count) AS female_count,
+    SUM(total_count) AS total_count
+FROM reconciled_layer.population
+GROUP BY year, region_code, age_group;
+
 
 COMMIT;

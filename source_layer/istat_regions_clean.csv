@@ -1,0 +1,21 @@
+region_code,region_name,region_abbr
+01,Piemonte,PIE
+02,Valle d'Aosta,VDA
+03,Lombardia,LOM
+04,Trentino-Alto Adige,TAA
+05,Veneto,VEN
+06,Friuli Venezia Giulia,FVG
+07,Liguria,LIG
+08,Emilia-Romagna,EMR
+09,Toscana,TOS
+10,Umbria,UMB
+11,Marche,MAR
+12,Lazio,LAZ
+13,Abruzzo,ABR
+14,Molise,MOL
+15,Campania,CAM
+16,Puglia,PUG
+17,Basilicata,BAS
+18,Calabria,CAL
+19,Sicilia,SIC
+20,Sardegna,SAR
