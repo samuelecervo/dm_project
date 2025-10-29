@@ -4,7 +4,7 @@ from pathlib import Path
 # path
 BASE_DIR = Path(__file__).resolve().parent.parent
 RAW_DIR = BASE_DIR / "data_raw"
-CLEAN_DIR = BASE_DIR / "source_layer"
+CLEAN_DIR = BASE_DIR / "staging_layer"
 input_file = RAW_DIR / "popolazione_istat.csv"
 output_file = CLEAN_DIR / "popolazione_istat_clean.csv"
 

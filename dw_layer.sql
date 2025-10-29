@@ -12,17 +12,17 @@ CREATE TABLE dw_layer.dimDate AS
 SELECT DISTINCT 
     date AS dateKey,
     date,
-    EXTRACT(YEAR FROM date) AS year,
-    EXTRACT(MONTH FROM date) AS month,
-    EXTRACT(DAY FROM date) AS day
+    EXTRACT(YEAR FROM date)::INTEGER AS year,
+    EXTRACT(MONTH FROM date)::INTEGER AS month,
+    EXTRACT(DAY FROM date)::INTEGER AS day
 FROM reconciled_layer.italian_vaccination
 UNION
 SELECT DISTINCT
     date AS dateKey,
     date,
-    EXTRACT(YEAR FROM date) AS year,
-    EXTRACT(MONTH FROM date) AS month,
-    EXTRACT(DAY FROM date) AS day
+    EXTRACT(YEAR FROM date)::INTEGER AS year,
+    EXTRACT(MONTH FROM date)::INTEGER AS month,
+    EXTRACT(DAY FROM date)::INTEGER AS day
 FROM reconciled_layer.covid_cases;
 
 -- dimRegion
@@ -83,7 +83,7 @@ GROUP BY date, region_code;
 -- fact_population
 CREATE TABLE dw_layer.fact_population AS
 SELECT
-    year,
+    year::INTEGER,
     region_code AS region_key,
     age_group AS age_key,
     SUM(male_count) AS male_count,
