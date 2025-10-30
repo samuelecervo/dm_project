@@ -1,18 +1,3 @@
-CREATE OR REPLACE VIEW dw_layer.vw_daily_swabs AS
-SELECT
-    date_key,
-    region_key,
-    swabs AS swabs_daily
-FROM dw_layer.fact_covid_cases;
-
-
-CREATE OR REPLACE VIEW dw_layer.vw_first_dose_daily AS
-SELECT
-    date_key,
-    region_key,
-    age_key,
-    first_dose
-FROM dw_layer.fact_vaccination;
 
 CREATE OR REPLACE VIEW dw_layer.vw_vaccination_cumulative AS
 SELECT
