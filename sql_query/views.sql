@@ -10,10 +10,10 @@ FROM dw_layer.fact_vaccination;
 
 CREATE OR REPLACE VIEW dw_layer.vw_covid_monthly AS
 SELECT
-    EXTRACT(YEAR FROM date_key) AS year,
-    EXTRACT(MONTH FROM date_key) AS month,
-    region_key,
-    SUM(new_positives) AS monthly_new_cases,
-    SUM(hospitalized) AS monthly_hospitalized
-FROM dw_layer.fact_covid_cases
-GROUP BY EXTRACT(YEAR FROM date_key), EXTRACT(MONTH FROM date_key), region_key;
+    d.year,d.month,fc.region_key,
+    SUM(fc.new_positives) AS monthly_new_cases,
+    SUM(fc.hospitalized) AS monthly_hospitalized
+FROM dw_layer.fact_covid_cases fc
+JOIN dw_layer.dimDate d
+    ON fc.date_key = d.datekey
+GROUP BY d.year, d.month, fc.region_key;
