@@ -63,10 +63,10 @@ CREATE TABLE reconciled_layer.vaccines (
 -- DATA LOADING
 -- =========================================================
 
-\copy reconciled_layer.covid_cases FROM 'staging_layer/dcp_regions_clean.csv' DELIMITER ',' CSV HEADER;
-\copy reconciled_layer.italian_vaccination FROM 'staging_layer/italian_vaccination_clean.csv' DELIMITER ',' CSV HEADER;
-\copy reconciled_layer.regions_istat FROM 'staging_layer/istat_regions_clean.csv' DELIMITER ',' CSV HEADER;
-\copy reconciled_layer.population FROM 'staging_layer/popolazione_istat_clean.csv' DELIMITER ',' CSV HEADER;
-\copy reconciled_layer.vaccines FROM 'staging_layer/vaccines_clean.csv' DELIMITER ',' CSV HEADER;
+\copy reconciled_layer.covid_cases FROM 'data_staging/dcp_regions_clean.csv' DELIMITER ',' CSV HEADER;
+\copy reconciled_layer.italian_vaccination FROM 'data_staging/italian_vaccination_clean.csv' DELIMITER ',' CSV HEADER;
+\copy reconciled_layer.regions_istat FROM 'data_staging/istat_regions_clean.csv' DELIMITER ',' CSV HEADER;
+\copy reconciled_layer.population FROM 'data_staging/popolazione_istat_clean.csv' DELIMITER ',' CSV HEADER;
+\copy reconciled_layer.vaccines FROM 'data_staging/vaccines_clean.csv' DELIMITER ',' CSV HEADER;
 
 COMMIT;

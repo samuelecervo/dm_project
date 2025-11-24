@@ -4,7 +4,7 @@ from pathlib import Path
 # Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 RAW_DIR = BASE_DIR / "data_raw"
-CLEAN_DIR = BASE_DIR / "staging_layer"
+CLEAN_DIR = BASE_DIR / "data_staging"
 
 input_file = RAW_DIR / "somministrazioni-vaccini.csv"
 output_file = CLEAN_DIR / "italian_vaccination_clean.csv"
@@ -72,4 +72,3 @@ CLEAN_DIR.mkdir(exist_ok=True)
 df.to_csv(output_file, index=False)
 
 print(f"File cleaned! Saved in {output_file}")
-
